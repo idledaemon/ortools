@@ -33,6 +33,16 @@ func NewCpModel() *CpModel {
 	}
 }
 
+func (m *CpModel) ClearObjective () {
+	m.proto.Objective = &genSat.CpObjectiveProto{
+				Vars:          make([]int32, 0),
+				Coeffs:        make([]int64, 0),
+				Offset:        0,
+				ScalingFactor: 0,
+				Domain:        make([]int64, 0),
+	}
+}
+
 func (m *CpModel) SetName(name string) {
 	m.proto.Name = name
 }
