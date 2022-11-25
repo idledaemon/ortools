@@ -17,13 +17,19 @@ func NewCpSolver() *CpSolver {
 }
 
 func (s *CpSolver) Solve(model CpModel) genSat.CpSolverResponse {
-
-	//fmt.Println(model.proto.String())
 	allSolutions := false
 	return genSat.SatHelperSolveWithParameters(*model.proto, genSat.SatParameters{
 		EnumerateAllSolutions: &allSolutions,
 	})
 
+}
+
+func (s *CpSolver) SolveWithTimeLimit(model CpModel, seconds float64) genSat.CpSolverResponse {
+	allSolutions := false
+	return genSat.SatHelperSolveWithParameters(*model.proto, genSat.SatParameters{
+		EnumerateAllSolutions: &allSolutions,
+		MaxTimeInSeconds: &seconds,
+	})
 }
 
 type GoCallback interface {
